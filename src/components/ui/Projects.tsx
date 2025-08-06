@@ -46,7 +46,7 @@ const Projects = () => {
       image: "/api/placeholder/400/250",
       technologies: ["React", "Tailwind CSS", "Vite"],
       github: "https://github.com/Aminbromdhane01/nextEra-",
-      live: "https://next-era-9fh7.vercel.app/",
+      live: "https://personal-portfolio-nine-drab-72.vercel.app/",
       featured: false,
       type: "completed",
       location: "Tunisia",
