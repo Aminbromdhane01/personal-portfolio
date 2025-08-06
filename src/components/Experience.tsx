@@ -44,7 +44,7 @@ const Experience = () => {
     },
     {
       title: "Full Stack Developer (Internship)",
-      company: "Vistom Tunisia",
+      company: "Visteon Tunisia",
       location: "Tunis, Tunisia",
       period: "06/2023 – 08/2023",
       description: [
