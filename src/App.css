@@ -1,0 +1,214 @@
+html,
+body,
+#root {
+  height: 100%;
+  /* scrollbar-gutter: stable; */
+  /* padding-right: 10px; */
+  max-width: 100%;
+}
+
+html {
+  scroll-margin-top: 5rem;
+}
+
+html[dir="rtl"] .i18n-icon {
+  transform: scaleX(-1);
+}
+
+.welcome-page {
+  cursor: none;
+}
+
+.welcome-page .custom-cursor {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2b3b31;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.2s,
+    height 0.2s;
+  filter: blur(20px);
+}
+
+@media (max-width: 768px) {
+  .welcome-page .custom-cursor {
+    display: none;
+  }
+}
+
+/* ::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888888a1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #888888c2;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: #5e5e5ea1;
+  border-radius: 5px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #888888c2;
+} */
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  -webkit-text-orientation: mixed;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  -moz-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+  text-orientation: mixed;
+}
+
+.header-vertical {
+  background-color: #0096db;
+  color: white;
+  font-weight: bold;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+.tactic.onaleballon th {
+  background-color: #007acc;
+  color: white;
+}
+.tactic.onnapasleballon th {
+  background-color: #e30613;
+  color: white;
+}
+
+.tactic tr,
+.tactic th,
+.tactic td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* .type {
+  background-color: #f2f2f2;
+} */
+.easy {
+  /* background-color: #dff0d8; */
+  color: green;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.easy:hover {
+  background-color: green;
+  color: white;
+}
+
+.base {
+  /* background-color: #f2d7a1; */
+  color: orange;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.base:hover {
+  background-color: orange;
+  color: white;
+}
+.difficult {
+  /* background-color: #f2b2a1; */
+  color: red;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.difficult:hover {
+  background-color: red;
+  color: white;
+}
+.w-md-editor-preview ol,
+.wmde-markdown ol {
+  list-style: auto !important;
+}
+
+.w-md-editor-preview ul,
+.wmde-markdown ul {
+  list-style-type: initial !important;
+}
+
+.ql-container {
+  flex-grow: 1;
+}
+.ql-container.ql-disabled {
+  border: none !important;
+}
+
+/* Target all view buttons (month, week, day) */
+.fc-dayGridMonth-button,
+.fc-timeGridWeek-button,
+.fc-timeGridDay-button {
+  background-color: #3b82f6 !important; /* Blue color */
+  border-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* Target navigation buttons (prev/next/today) */
+.fc-prev-button,
+.fc-next-button,
+.fc-today-button {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* Target all toolbar buttons (comprehensive approach) */
+.fc-button {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* Active state for selected view */
+.fc-button-active {
+  background-color: #1d4ed8 !important; /* Darker blue for active state */
+  border-color: #1d4ed8 !important;
+}
+
+/* Hover effects */
+.fc-button:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+/* Focus state */
+.fc-button:focus {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Disabled state */
+.fc-button:disabled {
+  background-color: #94a3b8 !important;
+  border-color: #94a3b8 !important;
+  opacity: 0.6 !important;
+}
+/*@media (max-width: 768px) {
+  [data-radix-popper-content-wrapper] {
+    width: calc(100% - 1rem);
+    margin: 0 0.5rem;
+  }
+}*/

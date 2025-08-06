@@ -1,0 +1,273 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Solar Energy Design System - Tailwind + Modern CSS Vars */
+@layer base {
+  :root {
+    font-family: "Inter", "Poppins", sans-serif;
+    line-height: 1.6;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    color-scheme: light dark;
+
+    --radius: 0.75rem;
+
+    /* Light Mode Colors */
+    --background: 214 40% 98%;
+    --foreground: 214 84% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 214 84% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 84% 15%;
+
+    --primary: 214 84% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 214 84% 55%;
+
+    --secondary: 214 76% 25%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 195 100% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --solar-orange: 35 100% 50%;
+    --solar-orange-foreground: 0 0% 100%;
+
+    --solar-green: 142 76% 30%;
+    --solar-green-foreground: 0 0% 100%;
+
+    --muted: 214 40% 94%;
+    --muted-foreground: 214 25% 40%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 31% 88%;
+    --input: 214 31% 94%;
+    --ring: 214 84% 35%;
+  }
+
+  .dark {
+    /* Dark Mode */
+    --background: 214 84% 4%;
+    --foreground: 214 20% 95%;
+
+    --card: 214 84% 6%;
+    --card-foreground: 214 20% 95%;
+
+    --popover: 214 84% 6%;
+    --popover-foreground: 214 20% 95%;
+
+    --primary: 214 84% 60%;
+    --primary-foreground: 214 84% 4%;
+    --primary-light: 214 84% 75%;
+
+    --secondary: 214 76% 35%;
+    --secondary-foreground: 214 84% 4%;
+
+    --accent: 195 100% 55%;
+    --accent-foreground: 214 84% 4%;
+
+    --solar-orange: 45 100% 65%;
+    --solar-green: 142 76% 45%;
+
+    --muted: 214 40% 12%;
+    --muted-foreground: 214 25% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 214 20% 95%;
+
+    --border: 214 31.8% 18%;
+    --input: 214 31.8% 18%;
+    --ring: 214 84% 45%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Color mappings for Tailwind classes */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Solar Energy Specific */
+  --color-solar-orange: hsl(var(--solar-orange));
+  --color-solar-green: hsl(var(--solar-green));
+  --color-primary-light: hsl(var(--primary-light));
+
+  /* Gradients */
+  --gradient-solar: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  --gradient-sky: linear-gradient(180deg, hsl(var(--primary-light)), hsl(var(--primary)));
+  --gradient-earth: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)));
+  --gradient-accent: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--solar-orange)));
+  --gradient-energy: linear-gradient(135deg, hsl(var(--solar-green)), hsl(var(--accent)));
+
+  /* Buttons */
+  --btn-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+  --btn-primary-hover: linear-gradient(135deg, hsl(var(--primary-light)), hsl(var(--accent)));
+  --btn-secondary: hsl(var(--primary) / 0.1);
+  --btn-secondary-hover: hsl(var(--primary) / 0.2);
+  --btn-solar: linear-gradient(135deg, hsl(var(--solar-orange)), hsl(var(--solar-green)));
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 hsl(var(--primary) / 0.05);
+  --shadow-md: 0 4px 6px -1px hsl(var(--primary) / 0.1), 0 2px 4px -1px hsl(var(--primary) / 0.06);
+  --shadow-lg: 0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -2px hsl(var(--primary) / 0.05);
+  --shadow-solar: 0 10px 30px -10px hsl(var(--primary) / 0.4);
+  --shadow-glow: 0 0 40px hsl(var(--primary-light) / 0.3);
+  --shadow-energy: 0 4px 14px 0 hsl(var(--solar-orange) / 0.25);
+}
+
+@layer components {
+  /* Animations */
+  .animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+  .animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
+  .animate-scale-in { animation: scale-in 0.4s ease-out forwards; }
+  .animate-solar-pulse { animation: solar-pulse 2s ease-in-out infinite; }
+
+  .typing-cursor::after { content: '|'; animation: blink 1s infinite; }
+
+  /* Cards */
+  .project-card {
+    @apply transition-all duration-300 hover:scale-105;
+    background: hsl(var(--card) / 0.8);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
+  }
+  .project-card:hover {
+    box-shadow: var(--shadow-solar);
+    border-color: hsl(var(--primary-light));
+  }
+
+  .solar-card {
+    background: var(--gradient-solar);
+    @apply transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-energy);
+  }
+
+  /* Badges */
+  .tech-badge {
+    @apply bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm transition-all duration-200 hover:bg-primary hover:text-primary-foreground;
+  }
+  .solar-badge {
+    background: var(--gradient-accent);
+    @apply text-white px-3 py-1 rounded-full text-sm transition-all duration-200 hover:scale-105;
+  }
+
+  /* Nav Links */
+  .nav-link {
+    @apply relative text-muted-foreground hover:text-foreground transition-colors duration-200;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200;
+    background: var(--gradient-solar);
+  }
+  .nav-link:hover::after { @apply w-full; }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-solar);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .solar-gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .energy-gradient-text {
+    background: var(--gradient-energy);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Buttons */
+  .btn-solar {
+    background: var(--btn-solar);
+    @apply text-white px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105;
+    box-shadow: var(--shadow-energy);
+  }
+  .btn-energy {
+    background: var(--gradient-energy);
+    @apply text-white px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105;
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@layer utilities {
+  .text-shadow { text-shadow: 0 2px 4px hsl(var(--primary) / 0.1); }
+  .solar-glow { box-shadow: var(--shadow-glow); }
+  .energy-shadow { box-shadow: var(--shadow-energy); }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes solar-pulse {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--solar-orange) / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(var(--solar-orange) / 0.6); }
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.solar-bg {
+  background: var(--gradient-solar);
+}
+.earth-bg {
+  background: var(--gradient-earth);
+}
+.bg-accent {
+  background: var(--gradient-accent);
+}
+.bg-sky {
+  background: var(--gradient-sky);
+}
