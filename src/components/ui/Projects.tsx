@@ -34,7 +34,7 @@ const Projects = () => {
         "Modern portfolio website showcasing projects and skills with responsive design, smooth animations, and interactive elements. Built with cutting-edge technologies for optimal performance.",
       image: "/api/placeholder/500/300",
       technologies: ["React", "shadcn/ui", "Tailwind CSS", "Vite"],
-      github: "https://github.com",
+      github: "https://github.com/Aminbromdhane01/personal-portfolio",
       live: "https://demo.com",
       featured: true,
       type: "completed",
