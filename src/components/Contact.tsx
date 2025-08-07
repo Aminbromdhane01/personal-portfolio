@@ -7,6 +7,9 @@ import {
   Linkedin,
   Github,
   Twitter,
+  X,
+  CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 
 const Card = ({ className, children }) => (
@@ -21,7 +24,7 @@ const CardContent = ({ className, children }) => (
   <div className={className}>{children}</div>
 );
 
-const Button = ({ size, className, children, ...props }) => {
+const Button = ({ size, className, children, disabled, ...props }) => {
   const sizeClasses = {
     lg: "h-11 px-8 text-lg",
   };
@@ -29,6 +32,7 @@ const Button = ({ size, className, children, ...props }) => {
   return (
     <button
       className={`inline-flex items-center justify-center rounded-md font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#339BFF] disabled:pointer-events-none disabled:opacity-50 bg-[#339BFF] text-white hover:bg-[#2B85E6] shadow-lg shadow-[#339BFF]/25 hover:shadow-[#339BFF]/40 hover:scale-[1.02] ${sizeClasses[size]} ${className}`}
+      disabled={disabled}
       {...props}
     >
       {children}
@@ -50,17 +54,118 @@ const Textarea = ({ className, ...props }) => (
   />
 );
 
+const Toast = ({ toast, onClose }) => {
+  const icons = {
+    success: <CheckCircle size={20} className="text-green-400" />,
+    error: <AlertCircle size={20} className="text-red-400" />,
+  };
+
+  const bgColors = {
+    success: "bg-green-900/80 border-green-700/50",
+    error: "bg-red-900/80 border-red-700/50",
+  };
+
+  return (
+    <div
+      className={`fixed top-4 right-4 z-50 p-4 rounded-lg border backdrop-blur-sm shadow-lg animate-slide-in ${
+        bgColors[toast.type]
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        {icons[toast.type]}
+        <div className="flex-1">
+          <div className="font-medium text-white">{toast.title}</div>
+          <div className="text-sm text-slate-300">{toast.message}</div>
+        </div>
+        <button
+          onClick={onClose}
+          className="text-slate-400 hover:text-white transition-colors"
+        >
+          <X size={16} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [toast, setToast] = useState<any>(null);
 
-  const handleSubmit = (e) => {
+  const showToast = (type, title, message) => {
+    setToast({ type, title, message });
+    setTimeout(() => setToast(null), 5000);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    setFormData({ name: "", email: "", message: "" });
+
+    // Basic validation
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    ) {
+      showToast("error", "Validation Error", "Please fill in all fields.");
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      showToast(
+        "error",
+        "Invalid Email",
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(
+        "https://portfolio-bakc-production.up.railway.app/mail/send",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: formData.email,
+            to: "mohamedaminebenromdhane01@gmail.com",
+            subject: `New Contact Form Message from ${formData.name}`,
+            text: `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        showToast(
+          "success",
+          "Message Sent!",
+          "Thank you for your message. I'll get back to you soon!"
+        );
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      showToast(
+        "error",
+        "Send Failed",
+        "There was an error sending your message. Please try again or contact me directly."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -96,6 +201,9 @@ const Contact = () => {
       id="contact"
       className="py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden"
     >
+      {/* Toast Notification */}
+      {toast && <Toast toast={toast} onClose={() => setToast(null)} />}
+
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#339BFF]/5 rounded-full blur-3xl"></div>
@@ -221,9 +329,23 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button onClick={handleSubmit} size="lg" className="w-full">
-                  <Send size={20} className="mr-2" />
-                  Send Message
+                <Button
+                  onClick={handleSubmit}
+                  size="lg"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={20} className="mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </div>
             </CardContent>
@@ -261,6 +383,17 @@ const Contact = () => {
           }
         }
 
+        @keyframes slide-in {
+          from {
+            opacity: 0;
+            transform: translateX(100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
         .animate-fade-in {
           animation: fade-in 1s ease-out forwards;
         }
@@ -276,6 +409,10 @@ const Contact = () => {
 
         .animate-slide-up:nth-child(2) {
           animation-delay: 0.4s;
+        }
+
+        .animate-slide-in {
+          animation: slide-in 0.3s ease-out forwards;
         }
       `}</style>
     </section>
